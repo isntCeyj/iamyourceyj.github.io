@@ -8,35 +8,20 @@
 </head>
 <body>
 <header class="top-nav">
-  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:var(--accent);margin-left:8px">💖 My Love</div></div>
+  <div class="logo">💖 My Love</div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
-    <a href="#" id="logoutBtn">Logout</a>
   </nav>
 </header>
 
-<section class="loveletter-page section">
-  <h1>My Dearest Baby 💌</h1>
+<section class="loveletter-page">
+  <h1>My Dearest Baby / Sin 💌</h1>
   <div class="letter-box">
-    <p>Happy monthsary, Trixia Mae Montes, my Baby, my Sin! Every single moment we share together is a treasure I hold close to my heart. Through this little website, I wanted to create a world that’s just ours—a place filled with our memories, laughter, silly games, and all the little things that make us 'us'. 💖</p>
-    
-    <p>From the videos that capture our smiles, to the photos that freeze our happiest moments, to the playful games we enjoy, every corner of this site is a piece of my heart I want to share with you. You are my inspiration, my joy, and my safe haven, my Baby and my Sin.</p>
-    
-    <p>I hope whenever you visit this space, it brings a smile to your face and reminds you of how deeply and truly you are loved. May our memories continue to grow, our laughter echo through time, and our hearts stay forever intertwined. 💕</p>
-    
+    <p>Happy monthsary Trixia Mae Montes! Every moment with you is a treasure. This website is just for you, a little world of our memories, games, and laughter. 💖</p>
     <p>Forever yours, <br>💌 Your Love</p>
   </div>
 </section>
-
-<script src="assets/js/app.js"></script>
-<script>
-const user = AUTH.getUser();
-if(!user) location.href='index.html';
-document.getElementById('logoutBtn').addEventListener('click', ()=>{
-  AUTH.logout(); location.href='index.html';
-});
-</script>
 </body>
 </html>
