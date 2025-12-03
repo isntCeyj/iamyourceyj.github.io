@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Yourceyj — Register</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -33,7 +34,7 @@ document.getElementById('regBtn').addEventListener('click', ()=>{
   const pass = document.getElementById('regPass').value;
   if(!name || !email || !pass) return alert('Please fill all fields');
 
-  const res = AUTH.register(name, email, pass);
+  const res = AUTH.register(name,email,pass);
   if(res.ok){
     alert('Account created! Please login.');
     location.href='login.html';
