@@ -8,63 +8,18 @@
 </head>
 <body>
 <header class="top-nav">
-  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:var(--accent);margin-left:8px">💖 My Love</div></div>
+  <div class="brand"><div class="logo"></div><span>💖 My Love</span></div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
-    <a href="#" id="logoutBtn">Logout</a>
   </nav>
 </header>
 
-<section class="photos-page section">
+<main>
   <h1>Memories 📸</h1>
-  <div class="holder" id="photoHolder">
-    <p>Drag your memories here</p>
-  </div>
-  <input type="file" id="photoUpload" multiple>
-  <div class="photo-grid" id="photoGrid"></div>
-</section>
-
-<script src="assets/js/app.js"></script>
-<script>
-const user = AUTH.getUser();
-if(!user) location.href='index.html';
-document.getElementById('logoutBtn').addEventListener('click', ()=>{
-  AUTH.logout(); location.href='index.html';
-});
-
-// Photo upload + drag-drop
-const upload = document.getElementById('photoUpload');
-const grid = document.getElementById('photoGrid');
-const holder = document.getElementById('photoHolder');
-
-upload.addEventListener('change', e => {
-  Array.from(e.target.files).forEach(file => {
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      const img = document.createElement('img');
-      img.src = ev.target.result;
-      img.draggable = true;
-      grid.appendChild(img);
-      img.addEventListener('dragstart', dragStart);
-    };
-    reader.readAsDataURL(file);
-  });
-});
-
-function dragStart(e){
-  e.dataTransfer.setData('text/plain', e.target.src);
-}
-
-holder.addEventListener('dragover', e=>e.preventDefault());
-holder.addEventListener('drop', e=>{
-  e.preventDefault();
-  const src = e.dataTransfer.getData('text/plain');
-  const img = document.createElement('img');
-  img.src = src;
-  holder.appendChild(img);
-});
-</script>
-</body>
-</html>
+  <div class="photo-deck">
+    <div class="photo-holder" id="holder1"></div>
+    <div class="photo-holder" id="holder2"></div>
+    <div class="photo-holder" id="holder3"></div>
+  </d
