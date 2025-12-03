@@ -1,8 +1,6 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Yourceyj — Register</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -22,7 +20,7 @@
 
   <div class="row">
     <button id="regBtn" class="heart-btn">Register</button>
-    <a href="login.html" class="link-small">Back to login</a>
+    <a href="index.html" class="link-small">Back to login</a>
   </div>
 </div>
 
@@ -33,11 +31,10 @@ document.getElementById('regBtn').addEventListener('click', ()=>{
   const email = document.getElementById('regEmail').value.trim().toLowerCase();
   const pass = document.getElementById('regPass').value;
   if(!name || !email || !pass) return alert('Please fill all fields');
-
   const res = AUTH.register(name,email,pass);
   if(res.ok){
     alert('Account created! Please login.');
-    location.href='login.html';
+    location.href='index.html'; // redirect to login page
   } else alert(res.msg);
 });
 </script>
