@@ -1,179 +1,18 @@
-/* General styles */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #fff;
-  color: #333;
-}
-
-/* Top navigation */
-.top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #ffe6f0;
-}
-.top-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #d6336c;
-  font-weight: bold;
-}
-
-/* Brand/logo */
-.brand {
-  display: flex;
-  align-items: center;
-}
-.brand .logo {
-  width: 40px;
-  height: 40px;
-  background: #d6336c;
-  border-radius: 50%;
-}
-
-/* Film slider */
 .film-wrap {
   display: flex;
-  align-items: center;
-  margin-top: 20px;
-  position: relative;
+  gap: 20px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d6336c #ffe6f0;
+  padding: 10px 0;
 }
 .film-track {
   display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 10px 0;
+  gap: 20px;
 }
 .film-item {
-  min-width: 120px;
-  height: 120px;
-  background: #ffd6e8;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.2);
+  min-width: 140px;
   text-align: center;
   cursor: pointer;
-  flex-shrink: 0;
-  transition: transform 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-.film-item:hover {
-  transform: scale(1.1);
-}
-.film-item .icon {
-  font-size: 2em;
-  margin-bottom: 5px;
-}
-.film-item p {
-  margin: 0;
-  font-weight: bold;
-  font-size: 0.9em;
-}
-.film-meta {
-  font-size: 0.8em;
-  color: #d6336c;
-  margin-top: 3px;
 }
 
-/* Slider buttons */
-.slider-control {
-  background: #d6336c;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 1.5em;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  flex-shrink: 0;
-}
-.slider-control:hover {
-  background: #ff85a2;
-}
-
-/* Auth pages (login/register) */
-.glass-wrap {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.2);
-  text-align: center;
-}
-.brand-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.form-row {
-  margin: 10px 0;
-}
-.input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1em;
-}
-.heart-btn {
-  padding: 10px 20px;
-  background: #d6336c;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-.heart-btn:hover {
-  background: #ff85a2;
-}
-.link-small {
-  display: inline-block;
-  margin-left: 15px;
-  font-size: 0.85em;
-  color: #d6336c;
-  text-decoration: none;
-}
-.link-small:hover {
-  text-decoration: underline;
-}
-
-/* Section styling */
-.section {
-  padding: 20px;
-}
-.section h2 {
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-.section .small {
-  font-size: 0.85em;
-  color: #666;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .film-item {
-    min-width: 90px;
-    height: 90px;
-    font-size: 0.8em;
-  }
-  .film-item .icon {
-    font-size: 1.5em;
-  }
-  .slider-control {
-    width: 30px;
-    height: 30px;
-    font-size: 1.2em;
-  }
-}
