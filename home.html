@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Yourceyj — Home</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -18,12 +17,10 @@
 </header>
 
 <main class="container">
-  <section class="section">
-    <h2>Welcome, <span id="userName"></span>!</h2>
-    <p class="small">Here’s your private collection of memories.</p>
-  </section>
-
   <section class="film-hero">
+    <div class="film-title">Happy Monthsary ❤</div>
+    <div class="film-sub">A private collection of our memories — just for you.</div>
+
     <div class="film-wrap section">
       <button class="slider-control left">‹</button>
       <div class="film-track" id="filmTrack">
@@ -38,41 +35,30 @@
       <button class="slider-control right">›</button>
     </div>
   </section>
+
+  <section class="section">
+    <h2>Quick preview</h2>
+    <p class="small">Recent uploads & highlights will appear here.</p>
+  </section>
 </main>
 
 <script src="assets/js/app.js"></script>
 <script>
-// Check logged-in user
 const user = AUTH.getUser();
-if(!user) location.href='login.html';
-document.getElementById('userName').innerText = user.name;
-
-// Logout
+if(!user) location.href='index.html'; // redirect to login if not logged in
 document.getElementById('logoutBtn').addEventListener('click', ()=>{
-  AUTH.logout();
-  location.href = 'login.html';
+  AUTH.logout(); location.href='index.html';
 });
 
-// Film slider functionality
-const filmTrack = document.getElementById('filmTrack');
-const leftBtn = document.querySelector('.slider-control.left');
-const rightBtn = document.querySelector('.slider-control.right');
-
-// Click a film item to navigate
-document.querySelectorAll('.film-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const page = item.dataset.page;
-    if(page) location.href = page;
+// Initialize film roll
+function initFilmRoll(){
+  const items = document.querySelectorAll('.film-item');
+  items.forEach(item=>{
+    item.addEventListener('click', ()=>{ location.href=item.dataset.page; });
   });
-});
-
-// Horizontal scroll
-leftBtn.addEventListener('click', () => {
-  filmTrack.scrollBy({ left: -300, behavior: 'smooth' });
-});
-rightBtn.addEventListener('click', () => {
-  filmTrack.scrollBy({ left: 300, behavior: 'smooth' });
-});
+}
+initFilmRoll();
 </script>
 </body>
 </html>
+
