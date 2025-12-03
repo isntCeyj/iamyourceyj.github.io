@@ -1,253 +1,102 @@
-/* ------------------------ General Styles ------------------------ */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #fff0f5;
-  color: #333;
+/* assets/css/style.css
+   Unified theme: glass + soft glow + portal accents
+*/
+:root{
+  --bg1: linear-gradient(180deg,#071224 0%, #0b2540 100%);
+  --accent:#ff6f91;
+  --accent-2:#ffd6e8;
+  --glass: rgba(255,255,255,0.06);
+  --muted: rgba(255,255,255,0.85);
+  --shadow: 0 12px 35px rgba(2,6,23,0.6);
+  --radius:16px; --maxW:1200px;
+  --glass-blur:10px;
 }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Roboto, Arial;color:var(--muted);background:var(--bg1);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top-nav{position:fixed;top:0;left:0;right:0;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));border-bottom:1px solid rgba(255,255,255,0.02);z-index:90}
+.top-nav .brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#f97316);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:20px;box-shadow:var(--shadow)}
+.top-nav nav{display:flex;gap:18px}
+.top-nav nav a{padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600}
+.top-nav nav a:hover{background:rgba(255,255,255,0.03);color:#fff}
 
-h1, h2, h3, p {
-  margin: 0 0 10px 0;
-}
+/* container */
+.container{max-width:var(--maxW);margin:110px auto 80px;padding:20px}
 
-a {
-  text-decoration: none;
-  color: #d6336c;
+/* GLASS CARD (login/register) - combines A,B,C styles */
+.glass-wrap{
+  width:100%;max-width:520px;margin:80px auto;padding:32px;border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  text-align:center;color:#fff;
+  border:1px solid rgba(255,255,255,0.04);
 }
+.brand-title{font-size:36px;color:var(--accent);letter-spacing:0.6px;text-shadow:0 6px 18px rgba(249,115,22,0.08)}
+.form-row{margin-top:18px}
+.input{width:86%;padding:12px;border-radius:12px;border:none;background:rgba(255,255,255,0.06);color:#fff;outline:none;font-size:15px}
+.row{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:16px}
+.heart-btn{position:relative;padding:12px 18px;border-radius:999px;background:linear-gradient(135deg,var(--accent),#ff85a2);border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(249,115,22,0.18)}
+.heart-btn:before{content:"❤";position:absolute;left:12px;top:10px;font-size:18px}
+.link-small{text-decoration:none;color:rgba(255,255,255,0.9);font-weight:600}
 
-/* ------------------------ Top Navigation ------------------------ */
-.top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background: #ffe6f0;
-  box-shadow: 0 2px 6px rgba(0,0,0,.1);
-}
-.top-nav a {
-  margin: 0 12px;
-  font-weight: bold;
-  color: #d6336c;
-  transition: 0.3s;
-}
-.top-nav a:hover { color: #ff85a2; }
+/* Home film roll */
+.film-hero{display:flex;flex-direction:column;align-items:center;gap:10px}
+.film-title{font-size:30px;color:#fff}
+.film-sub{color:rgba(255,255,255,0.8);font-size:14px}
+.film-wrap{position:relative;width:100%;height:260px;margin-top:14px}
+.film-track{display:flex;gap:18px;align-items:center;padding:20px;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.film-item{width:220px;height:240px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;cursor:pointer;border:1px solid rgba(255,255,255,0.03);transition:transform .25s}
+.film-item .icon{font-size:40px;margin-bottom:10px}
+.film-item p{margin:0;font-weight:700}
+.film-meta{font-size:12px;color:rgba(255,255,255,0.7);margin-top:8px}
 
-.brand {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-}
-.brand .logo {
-  width: 40px;
-  height: 40px;
-  background: #d6336c;
-  border-radius: 50%;
-  margin-right: 10px;
-}
+/* slider controls */
+.slider-control{position:absolute;left:8px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:var(--muted);font-size:36px;cursor:pointer;z-index:40}
+.slider-control.right{left:auto;right:8px}
 
-/* ------------------------ Film Slider (Home Page) ------------------------ */
-.film-wrap {
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin: 20px auto;
-  max-width: 90%;
-}
-.film-track {
-  display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 10px 0;
-}
-.film-item {
-  min-width: 120px;
-  height: 120px;
-  background: #ffd6e8;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.2);
-  text-align: center;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: transform 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.film-item:hover { transform: scale(1.1); }
-.film-item .icon { font-size: 2em; margin-bottom: 5px; }
-.film-item p { font-weight: bold; margin: 0; }
-.film-item .film-meta { font-size: 0.8em; color: #a6336c; }
+/* sections */
+.section{margin-top:26px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.section h2{margin:0 0 10px 0}
 
-/* Scrollbar hidden for film-track */
-.film-track::-webkit-scrollbar { display: none; }
+/* videos */
+.video-tiles{display:flex;gap:12px;flex-wrap:wrap}
+.video-tile{width:320px;height:180px;border-radius:12px;overflow:hidden;background:#000;position:relative;border:1px solid rgba(255,255,255,0.02)}
+.video-tile video{width:100%;height:100%;object-fit:cover}
+.tile-controls{position:absolute;left:8px;right:8px;bottom:8px;display:flex;justify-content:space-between;gap:8px}
 
-/* ------------------------ Buttons ------------------------ */
-.btn {
-  padding: 10px 20px;
-  margin: 5px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-.btn.primary {
-  background: #d6336c;
-  color: white;
-}
-.btn.primary:hover { opacity: 0.8; }
-.btn.ghost {
-  background: #fff;
-  color: #d6336c;
-  border: 2px solid #d6336c;
-}
-.btn.ghost:hover { opacity: 0.8; }
+/* photobooth */
+.photobooth-grid{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.pb-left{flex:1;min-width:320px;background:rgba(255,255,255,0.02);padding:14px;border-radius:12px}
+.pb-right{width:420px;background:rgba(255,255,255,0.02);padding:14px;border-radius:12px}
+.preview-canvas{width:100%;border-radius:10px;display:block;background:#000}
 
-/* ------------------------ Auth Pages ------------------------ */
-.auth-page, .glass-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-.auth-card, .glass-wrap {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.2);
-  width: 320px;
-  text-align: center;
-}
-.auth-card h1, .brand-title { margin-bottom: 20px; }
-.input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-.heart-btn {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-}
-.heart-btn::before {
-  content: "❤";
-  display: inline-block;
-}
+/* deck */
+.deck{position:relative;width:100%;height:420px;display:flex;align-items:center;justify-content:center}
+.card{position:absolute;width:420px;height:300px;border-radius:14px;background-size:cover;background-position:center;box-shadow:var(--shadow);transition:transform .6s,opacity .4s}
+.card .caption{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,0.45);padding:6px 10px;border-radius:10px}
 
-/* ------------------------ Photo Page ------------------------ */
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
-  gap: 15px;
-  margin-top: 20px;
-}
-.photo-grid img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 15px;
-}
+/* holder */
+.holder-area{margin-top:18px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.02);display:flex;gap:12px;align-items:center;justify-content:center}
+.holder{min-height:120px;width:140px;border-radius:10px;border:2px dashed rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;padding:8px;background:rgba(255,255,255,0.01)}
 
-/* ------------------------ PhotoBooth ------------------------ */
-#pbCanvas {
-  margin: 20px auto;
-  display: block;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.2);
-}
-#templateSelect, #pbUpload, #pbPreview, #pbDownload {
-  margin: 10px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #d6336c;
-}
-#pbPreview, #pbDownload { background:#d6336c; color:white; cursor:pointer; }
+/* modal / gift / confetti */
+.modal{position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:160;visibility:hidden;opacity:0;transition:.2s}
+.modal.open{visibility:visible;opacity:1}
+.modal .box{background:linear-gradient(180deg,#071426,#081d2a);padding:22px;border-radius:12px;max-width:760px;width:92%;box-shadow:var(--shadow);text-align:center}
+.gift{width:150px;height:140px;margin:18px auto 8px;border-radius:12px;background:linear-gradient(180deg,#ff87a8,#ff6f91);display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;cursor:pointer;position:relative;box-shadow:0 20px 50px rgba(249,115,22,0.16)}
+.kiss{font-size:36px;color:#ffd6e8;margin-top:12px;display:none}
+.confetti-piece{position:fixed;pointer-events:none;z-index:9999}
 
-/* ------------------------ Videos ------------------------ */
-.video-slider {
-  display: flex;
-  gap: 15px;
-  overflow-x: auto;
-  padding: 10px 0;
-  scroll-behavior: smooth;
-}
-.video-box {
-  min-width: 180px;
-  background:#ffe6f0;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
-  overflow:hidden;
-  cursor:pointer;
-  text-align:center;
-}
-.video-box video {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-}
-.video-box p { font-weight:bold; margin:5px 0; }
+/* small helpers */
+.small{font-size:13px;color:rgba(255,255,255,0.8)}
+.hidden{display:none}
 
-/* Modal */
-.modal {
-  display:none;
-  position:fixed;
-  top:0; left:0; width:100%; height:100%;
-  background:rgba(0,0,0,0.5);
-  justify-content:center;
-  align-items:center;
-  z-index:100;
-}
-.modal-content {
-  background:#fff0f5;
-  padding:30px;
-  border-radius:15px;
-  text-align:center;
-}
-
-/* ------------------------ Love Letter ------------------------ */
-.letter-box {
-  max-width:600px;
-  margin: 30px auto;
-  padding:20px;
-  background:#ffe6f0;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
-  font-size:1.1em;
-}
-
-/* ------------------------ Upload Game ------------------------ */
-.image-holder {
-  width:200px;
-  height:200px;
-  border:2px dashed #d6336c;
-  margin:20px auto;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  cursor:pointer;
-  border-radius:15px;
-  font-size:2em;
-  background-color:#fff0f5;
-  transition: transform .2s;
-}
-.image-holder:hover { transform:scale(1.05); }
-.image-holder img { width:100%; height:100%; border-radius:15px; object-fit:cover; }
-
-.gift-box {
-  font-size:80px;
-  cursor:pointer;
-  display:none;
-  margin-top:30px;
-}
-.gift-popup {
-  display:none;
-  font-size:100px;
-  text-align:center;
-  margin-top:20px;
+/* responsive */
+@media (max-width:900px){
+  .film-item{width:170px;height:200px}
+  .card{width:320px;height:230px}
+  .pb-right{width:100%}
+  .container{margin-top:90px}
 }
