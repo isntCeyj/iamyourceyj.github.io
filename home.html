@@ -1,47 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Yourceyj — Home</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="top-nav">
-  <div class="brand">
-    <div class="logo"></div>
-    <div style="font-weight:700;color:var(--accent);margin-left:8px">Yourceyj</div>
-  </div>
+  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:var(--accent);margin-left:8px">Yourceyj</div></div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="#" id="logoutBtn">Logout</a>
   </nav>
 </header>
 
 <main class="container">
-  <section class="film-hero">
-    <div class="film-title">Happy Monthsary ❤</div>
-    <div class="film-sub">A private collection of our memories — just for you.</div>
+  <section class="section">
+    <h2>Welcome, <span id="userName"></span>!</h2>
+    <p class="small">Here’s your private collection of memories.</p>
+  </section>
 
+  <section class="film-hero">
     <div class="film-wrap section">
+      <button class="slider-control left">‹</button>
       <div class="film-track" id="filmTrack">
         <div class="film-item" data-page="videos.html"><div class="icon">🎬</div><p>Videos</p><div class="film-meta">Upload & preview</div></div>
         <div class="film-item" data-page="photos.html"><div class="icon">📸</div><p>Photos</p><div class="film-meta">Deck & collect</div></div>
         <div class="film-item" data-page="photobooth.html"><div class="icon">🎞️</div><p>PhotoBooth</p><div class="film-meta">Make & download</div></div>
-        <div class="film-item" data-page="game-upload.html"><div class="icon">💌</div><p>Question</p><div class="film-meta">Play & open gift</div></div>
+        <div class="film-item" data-page="game1.html"><div class="icon">💌</div><p>Question</p><div class="film-meta">Play & open gift</div></div>
+        <div class="film-item" data-page="game2.html"><div class="icon">💖</div><p>Upload Game</p><div class="film-meta">Add memories</div></div>
+        <div class="film-item" data-page="game3.html"><div class="icon">🎭</div><p>Look-Alike</p><div class="film-meta">Cartoon & review</div></div>
         <div class="film-item" data-page="loveletter.html"><div class="icon">✉️</div><p>Love Letter</p><div class="film-meta">Read my note</div></div>
       </div>
+      <button class="slider-control right">›</button>
     </div>
   </section>
 </main>
 
 <script src="assets/js/app.js"></script>
 <script>
-const track = document.getElementById('filmTrack');
-track.addEventListener('click', e=>{
-  let item = e.target.closest('.film-item');
-  if(item) location.href = item.dataset.page;
+// Check logged-in user
+const user = AUTH.getUser();
+if(!user) location.href='login.html';
+document.getElementById('userName').innerText = user.name;
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  AUTH.logout();
+  location.href = 'login.html';
+});
+
+// Film slider functionality
+const filmTrack = document.getElementById('filmTrack');
+const leftBtn = document.querySelector('.slider-control.left');
+const rightBtn = document.querySelector('.slider-control.right');
+
+// Click a film item to navigate
+document.querySelectorAll('.film-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const page = item.dataset.page;
+    if(page) location.href = page;
+  });
+});
+
+// Horizontal scroll
+leftBtn.addEventListener('click', () => {
+  filmTrack.scrollBy({ left: -300, behavior: 'smooth' });
+});
+rightBtn.addEventListener('click', () => {
+  filmTrack.scrollBy({ left: 300, behavior: 'smooth' });
 });
 </script>
 </body>
