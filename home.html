@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Yourceyj — Home</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -21,12 +22,28 @@
     <h2>Welcome, <span id="userName"></span>!</h2>
     <p class="small">Here’s your private collection of memories.</p>
   </section>
+
+  <section class="film-hero">
+    <div class="film-wrap section">
+      <button class="slider-control left">‹</button>
+      <div class="film-track" id="filmTrack">
+        <div class="film-item" data-page="videos.html"><div class="icon">🎬</div><p>Videos</p><div class="film-meta">Upload & preview</div></div>
+        <div class="film-item" data-page="photos.html"><div class="icon">📸</div><p>Photos</p><div class="film-meta">Deck & collect</div></div>
+        <div class="film-item" data-page="photobooth.html"><div class="icon">🎞️</div><p>PhotoBooth</p><div class="film-meta">Make & download</div></div>
+        <div class="film-item" data-page="game1.html"><div class="icon">💌</div><p>Question</p><div class="film-meta">Play & open gift</div></div>
+        <div class="film-item" data-page="game2.html"><div class="icon">💖</div><p>Upload Game</p><div class="film-meta">Add memories</div></div>
+        <div class="film-item" data-page="game3.html"><div class="icon">🎭</div><p>Look-Alike</p><div class="film-meta">Cartoon & review</div></div>
+        <div class="film-item" data-page="loveletter.html"><div class="icon">✉️</div><p>Love Letter</p><div class="film-meta">Read my note</div></div>
+      </div>
+      <button class="slider-control right">›</button>
+    </div>
+  </section>
 </main>
 
 <script src="assets/js/app.js"></script>
 <script>
 const user = AUTH.getUser();
-if(!user) location.href='login.html'; // redirect if not logged in
+if(!user) location.href='login.html';
 document.getElementById('userName').innerText = user.name;
 
 document.getElementById('logoutBtn').addEventListener('click', ()=>{
