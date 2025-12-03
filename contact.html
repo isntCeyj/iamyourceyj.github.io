@@ -8,21 +8,31 @@
 </head>
 <body>
 <header class="top-nav">
-  <div class="logo">💖 My Love</div>
+  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:#d6336c;margin-left:8px">💖 My Love</div></div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="#" id="logoutBtn">Logout</a>
   </nav>
 </header>
 
-<section class="contact-page">
+<section class="contact-page section">
   <h1>Contact ❤️</h1>
   <p>This website is just for us, but if you want, you can send me a sweet message here:</p>
   <form>
     <textarea placeholder="Your message..." rows="5"></textarea>
-    <button type="submit">Send 💌</button>
+    <button type="submit" class="heart-btn">Send 💌</button>
   </form>
 </section>
+
+<script src="assets/js/app.js"></script>
+<script>
+const user = AUTH.getUser();
+if(!user) location.href='login.html';
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  AUTH.logout(); location.href='login.html';
+});
+</script>
 </body>
 </html>
