@@ -24,3 +24,4 @@ window.AUTH = {
   logout: function(){ localStorage.removeItem('currentUser'); },
   getUser: function(){ return JSON.parse(localStorage.getItem('currentUser')||'null'); }
 };
+
