@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Yourceyj — Login</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -27,11 +28,11 @@
 <script src="assets/js/app.js"></script>
 <script>
 document.getElementById('loginBtn').addEventListener('click', ()=>{
-  const e = document.getElementById('loginEmail').value.trim().toLowerCase();
-  const p = document.getElementById('loginPass').value;
-  const r = AUTH.login(e, p);
-  if(r.ok) location.href='home.html';
-  else alert(r.msg || 'Login failed');
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  const res = AUTH.login(email, pass);
+  if(res.ok) location.href='home.html';
+  else alert(res.msg || 'Login failed');
 });
 </script>
 </body>
