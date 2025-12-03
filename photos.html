@@ -8,7 +8,7 @@
 </head>
 <body>
 <header class="top-nav">
-  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:#d6336c;margin-left:8px">💖 My Love</div></div>
+  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:var(--accent);margin-left:8px">💖 My Love</div></div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
@@ -29,9 +29,9 @@
 <script src="assets/js/app.js"></script>
 <script>
 const user = AUTH.getUser();
-if(!user) location.href='login.html';
+if(!user) location.href='index.html';
 document.getElementById('logoutBtn').addEventListener('click', ()=>{
-  AUTH.logout(); location.href='login.html';
+  AUTH.logout(); location.href='index.html';
 });
 
 // Photo upload + drag-drop
@@ -57,8 +57,8 @@ function dragStart(e){
   e.dataTransfer.setData('text/plain', e.target.src);
 }
 
-holder.addEventListener('dragover', e => e.preventDefault());
-holder.addEventListener('drop', e => {
+holder.addEventListener('dragover', e=>e.preventDefault());
+holder.addEventListener('drop', e=>{
   e.preventDefault();
   const src = e.dataTransfer.getData('text/plain');
   const img = document.createElement('img');
