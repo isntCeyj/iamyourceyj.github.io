@@ -8,7 +8,7 @@
 </head>
 <body>
 <header class="top-nav">
-  <div class="brand"><div class="logo"></div><span>💖 My Love</span></div>
+  <div class="logo">💖 My Love</div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
@@ -16,16 +16,24 @@
   </nav>
 </header>
 
-<main>
+<section class="videos-page">
   <h1>Our Memories 🎬</h1>
-  <div class="video-track">
-    <div class="video-box" data-src="assets/img/video1.mp4"><video muted loop src="assets/img/video1.mp4"></video><p>Video 1</p></div>
-    <div class="video-box" data-src="assets/img/video2.mp4"><video muted loop src="assets/img/video2.mp4"></video><p>Video 2</p></div>
-    <div class="video-box" data-src="assets/img/video3.mp4"><video muted loop src="assets/img/video3.mp4"></video><p>Video 3</p></div>
+  <div class="video-slider" id="videoSlider">
+    <div class="video-box" data-src="assets/img/video1.mp4">
+      <video muted loop src="assets/img/video1.mp4"></video>
+      <p>Video 1</p>
+    </div>
+    <div class="video-box" data-src="assets/img/video2.mp4">
+      <video muted loop src="assets/img/video2.mp4"></video>
+      <p>Video 2</p>
+    </div>
+    <div class="video-box" data-src="assets/img/video3.mp4">
+      <video muted loop src="assets/img/video3.mp4"></video>
+      <p>Video 3</p>
+    </div>
   </div>
-</main>
+</section>
 
-<!-- Video popup -->
 <div id="videoPopup" class="modal">
   <div class="modal-content">
     <video id="popupVid" controls autoplay></video>
@@ -34,6 +42,20 @@
 </div>
 
 <script src="assets/js/app.js"></script>
-<script>initVideoPage();</script>
+<script>
+document.querySelectorAll('.video-box').forEach(box=>{
+  box.addEventListener('click',()=>{
+    const src = box.dataset.src;
+    const vid = document.getElementById('popupVid');
+    vid.src = src;
+    document.getElementById('videoPopup').style.display='flex';
+  });
+});
+document.getElementById('closeVideo').addEventListener('click',()=>{
+  const vid=document.getElementById('popupVid');
+  vid.pause();
+  document.getElementById('videoPopup').style.display='none';
+});
+</script>
 </body>
 </html>
