@@ -42,13 +42,36 @@
 
 <script src="assets/js/app.js"></script>
 <script>
+// Check logged-in user
 const user = AUTH.getUser();
 if(!user) location.href='login.html';
 document.getElementById('userName').innerText = user.name;
 
+// Logout
 document.getElementById('logoutBtn').addEventListener('click', ()=>{
   AUTH.logout();
   location.href = 'login.html';
+});
+
+// Film slider functionality
+const filmTrack = document.getElementById('filmTrack');
+const leftBtn = document.querySelector('.slider-control.left');
+const rightBtn = document.querySelector('.slider-control.right');
+
+// Click a film item to navigate
+document.querySelectorAll('.film-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const page = item.dataset.page;
+    if(page) location.href = page;
+  });
+});
+
+// Horizontal scroll
+leftBtn.addEventListener('click', () => {
+  filmTrack.scrollBy({ left: -300, behavior: 'smooth' });
+});
+rightBtn.addEventListener('click', () => {
+  filmTrack.scrollBy({ left: 300, behavior: 'smooth' });
 });
 </script>
 </body>
