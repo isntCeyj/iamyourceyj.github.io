@@ -8,86 +8,63 @@
 </head>
 <body>
 <header class="top-nav">
-  <div class="logo">💖 My Love</div>
+  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:var(--accent);margin-left:8px">💖 My Love</div></div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="#" id="logoutBtn">Logout</a>
   </nav>
 </header>
 
-<section class="photobooth-page">
+<section class="photobooth-page section">
   <h1>PhotoBooth 🎞️</h1>
-  <input type="file" id="pbUpload" multiple>
+  <input type="file" id="pbUpload">
   <select id="templateSelect">
     <option value="none">Select Template</option>
-    <option value="christmas">Christmas</option>
-    <option value="halloween">Halloween</option>
-    <option value="romantic">Romantic</option>
-    <option value="fantasy">Fantasy</option>
-  </select>
-  <select id="picCount">
-    <option value="1">1 Picture</option>
-    <option value="3">3 Pictures</option>
-    <option value="6">6 Pictures</option>
+    <option value="frame1">Frame 1</option>
+    <option value="frame2">Frame 2</option>
   </select>
   <button id="pbPreview">Preview</button>
-  <canvas id="pbCanvas" width="600" height="400"></canvas>
+  <canvas id="pbCanvas" width="400" height="300"></canvas>
   <button id="pbDownload">Download</button>
 </section>
 
 <script src="assets/js/app.js"></script>
 <script>
-// Photobooth logic
-const pbUpload = document.getElementById('pbUpload');
-const templateSelect = document.getElementById('templateSelect');
-const picCount = document.getElementById('picCount');
-const pbPreview = document.getElementById('pbPreview');
-const pbCanvas = document.getElementById('pbCanvas');
-const ctx = pbCanvas.getContext('2d');
-let images = [];
-
-pbUpload.addEventListener('change', e => {
-  images = [];
-  Array.from(e.target.files).forEach(file => {
-    const reader = new FileReader();
-    reader.onload = ev => { images.push(ev.target.result); };
-    reader.readAsDataURL(file);
-  });
+const user = AUTH.getUser();
+if(!user) location.href='index.html';
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  AUTH.logout(); location.href='index.html';
 });
 
-pbPreview.addEventListener('click', () => {
-  ctx.clearRect(0,0,pbCanvas.width,pbCanvas.height);
-  const count = parseInt(picCount.value);
-  const w = pbCanvas.width / count;
-  const h = pbCanvas.height;
-  for(let i=0;i<count;i++){
-    if(images[i]) {
-      const img = new Image();
-      img.src = images[i];
-      img.onload = () => {
-        ctx.drawImage(img, i*w, 0, w, h);
-        drawTemplate();
-      };
-    }
+const upload = document.getElementById('pbUpload');
+const select = document.getElementById('templateSelect');
+const preview = document.getElementById('pbPreview');
+const canvas = document.getElementById('pbCanvas');
+const ctx = canvas.getContext('2d');
+let img = new Image();
+
+upload.addEventListener('change', e=>{
+  const reader = new FileReader();
+  reader.onload=function(ev){ img.src=ev.target.result; }
+  reader.readAsDataURL(e.target.files[0]);
+});
+
+preview.addEventListener('click', ()=>{
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  if(select.value==='frame1'){
+    ctx.strokeStyle='pink'; ctx.lineWidth=15; ctx.strokeRect(0,0,canvas.width,canvas.height);
+  } else if(select.value==='frame2'){
+    ctx.strokeStyle='purple'; ctx.lineWidth=15; ctx.strokeRect(0,0,canvas.width,canvas.height);
   }
 });
 
-function drawTemplate(){
-  const tpl = templateSelect.value;
-  ctx.strokeStyle='pink';
-  ctx.lineWidth=15;
-  if(tpl==='christmas') ctx.strokeStyle='green';
-  else if(tpl==='halloween') ctx.strokeStyle='orange';
-  else if(tpl==='romantic') ctx.strokeStyle='red';
-  else if(tpl==='fantasy') ctx.strokeStyle='purple';
-  ctx.strokeRect(0,0,pbCanvas.width,pbCanvas.height);
-}
-
-document.getElementById('pbDownload').addEventListener('click', () => {
-  const a=document.createElement('a');
-  a.href=pbCanvas.toDataURL();
-  a.download='photobooth.png';
+document.getElementById('pbDownload').addEventListener('click', ()=>{
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL();
+  a.download = 'photobooth.png';
   a.click();
 });
 </script>
