@@ -3,12 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game 2 — Memories Gift</title>
+<title>Upload Game 💖</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  main { text-align:center; padding:30px; }
+  .question-box { margin-bottom:20px; font-size:1.2em; }
+  .image-holder {
+    width: 200px; height: 200px;
+    border: 2px dashed #d6336c;
+    margin:20px auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    border-radius:15px;
+    font-size:2em;
+    transition: transform .2s;
+    background-color:#fff0f5;
+  }
+  .image-holder:hover { transform:scale(1.05); }
+  .image-holder img { width:100%; height:100%; border-radius:15px; object-fit:cover; }
+  .btn { padding:10px 20px; margin:10px; border:none; border-radius:10px; cursor:pointer; font-weight:bold; }
+  .btn.primary { background:#d6336c; color:white; }
+  .gift-box { font-size:80px; cursor:pointer; display:none; margin-top:30px; }
+  .gift-popup { display:none; font-size:100px; text-align:center; margin-top:20px; }
+</style>
 </head>
 <body>
 <header class="top-nav">
-  <div class="logo">💖 My Love</div>
+  <div class="brand"><div class="logo"></div><span>💖 My Love</span></div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
@@ -16,46 +39,34 @@
   </nav>
 </header>
 
-<section class="game-page">
-  <h1>Upload Your Memories 💖</h1>
-  <input type="file" id="memUpload" multiple>
-  <div id="memGrid" class="photo-grid"></div>
-</section>
-
-<!-- Gift popup -->
-<div id="giftBox2" class="modal">
-  <div class="modal-content">
-    <h2>💖 Here's My Gift!</h2>
-    <button id="openGift2">Open Gift</button>
-    <div id="giftResult2" style="display:none;">
-      <p>I love youuu! Happy monthsary 💖</p>
-      <p>😘💋</p>
-    </div>
+<main>
+  <h1>Memory Upload Game 🎁</h1>
+  <div class="question-box" id="questionBox">Question will appear here</div>
+  
+  <div class="image-holder" id="imageHolder">📎</div>
+  <input type="file" id="imageUpload" style="display:none;" accept="image/*">
+  
+  <div>
+    <button class="btn primary" id="prevBtn">Back</button>
+    <button class="btn primary" id="nextBtn">Next</button>
   </div>
-</div>
+  
+  <div class="gift-box" id="giftBox">🎁</div>
+  <div class="gift-popup" id="giftPopup">💋</div>
+</main>
 
-<script src="assets/js/app.js"></script>
 <script>
-// Upload memories + display
-const memUpload=document.getElementById('memUpload');
-const memGrid=document.getElementById('memGrid');
-memUpload.addEventListener('change',e=>{
-  Array.from(e.target.files).forEach(file=>{
-    const reader=new FileReader();
-    reader.onload=function(ev){
-      const img=document.createElement('img');
-      img.src=ev.target.result;
-      memGrid.appendChild(img);
-    }
-    reader.readAsDataURL(file);
-  });
-});
+const questions = [
+  "Upload a picture of us together ❤️",
+  "Upload a picture of your favorite memory with me 💖",
+  "Upload a funny photo of us 😂"
+];
 
-// Gift popup
-document.getElementById('openGift2').addEventListener('click',()=>{
-  document.getElementById('giftResult2').style.display='block';
-  document.getElementById('openGift2').style.display='none';
-});
-</script>
-</body>
-</html>
+let current = 0;
+const questionBox = document.getElementById('questionBox');
+const imageHolder = document.getElementById('imageHolder');
+const imageUpload = document.getElementById('imageUpload');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const
+
