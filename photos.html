@@ -8,15 +8,16 @@
 </head>
 <body>
 <header class="top-nav">
-  <div class="logo">💖 My Love</div>
+  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:#d6336c;margin-left:8px">💖 My Love</div></div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="#" id="logoutBtn">Logout</a>
   </nav>
 </header>
 
-<section class="photos-page">
+<section class="photos-page section">
   <h1>Memories 📸</h1>
   <div class="holder" id="photoHolder">
     <p>Drag your memories here</p>
@@ -27,20 +28,26 @@
 
 <script src="assets/js/app.js"></script>
 <script>
-// Photo upload + drag-drop
-const upload=document.getElementById('photoUpload');
-const grid=document.getElementById('photoGrid');
-const holder=document.getElementById('photoHolder');
+const user = AUTH.getUser();
+if(!user) location.href='login.html';
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  AUTH.logout(); location.href='login.html';
+});
 
-upload.addEventListener('change',e=>{
-  Array.from(e.target.files).forEach(file=>{
-    const reader=new FileReader();
-    reader.onload=function(ev){
-      const img=document.createElement('img');
-      img.src=ev.target.result;
-      img.draggable=true;
+// Photo upload + drag-drop
+const upload = document.getElementById('photoUpload');
+const grid = document.getElementById('photoGrid');
+const holder = document.getElementById('photoHolder');
+
+upload.addEventListener('change', e => {
+  Array.from(e.target.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      const img = document.createElement('img');
+      img.src = ev.target.result;
+      img.draggable = true;
       grid.appendChild(img);
-      img.addEventListener('dragstart',dragStart);
+      img.addEventListener('dragstart', dragStart);
     };
     reader.readAsDataURL(file);
   });
@@ -49,12 +56,13 @@ upload.addEventListener('change',e=>{
 function dragStart(e){
   e.dataTransfer.setData('text/plain', e.target.src);
 }
-holder.addEventListener('dragover',e=>e.preventDefault());
-holder.addEventListener('drop',e=>{
+
+holder.addEventListener('dragover', e => e.preventDefault());
+holder.addEventListener('drop', e => {
   e.preventDefault();
-  const src=e.dataTransfer.getData('text/plain');
-  const img=document.createElement('img');
-  img.src=src;
+  const src = e.dataTransfer.getData('text/plain');
+  const img = document.createElement('img');
+  img.src = src;
   holder.appendChild(img);
 });
 </script>
