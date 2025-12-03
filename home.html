@@ -1,28 +1,30 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yourceyj — Home</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
 <header class="top-nav">
-  <div class="brand"><div class="logo"></div><div style="font-weight:700;color:var(--accent);margin-left:8px">Yourceyj</div></div>
+  <div class="brand"><div class="logo"></div>Yourceyj</div>
   <nav>
     <a href="home.html">Home</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
-    <a href="#" id="logoutBtn">Logout</a>
+    <a href="login.html" id="logoutBtn">Logout</a>
   </nav>
 </header>
 
 <main class="container">
+
   <section class="film-hero">
     <div class="film-title">Happy Monthsary ❤</div>
     <div class="film-sub">A private collection of our memories — just for you.</div>
 
-    <div class="film-wrap section">
-      <button class="slider-control left">‹</button>
+    <div class="film-wrap">
       <div class="film-track" id="filmTrack">
         <div class="film-item" data-page="videos.html"><div class="icon">🎬</div><p>Videos</p><div class="film-meta">Upload & preview</div></div>
         <div class="film-item" data-page="photos.html"><div class="icon">📸</div><p>Photos</p><div class="film-meta">Deck & collect</div></div>
@@ -32,7 +34,6 @@
         <div class="film-item" data-page="game3.html"><div class="icon">🎭</div><p>Look-Alike</p><div class="film-meta">Cartoon & review</div></div>
         <div class="film-item" data-page="loveletter.html"><div class="icon">✉️</div><p>Love Letter</p><div class="film-meta">Read my note</div></div>
       </div>
-      <button class="slider-control right">›</button>
     </div>
   </section>
 
@@ -40,24 +41,31 @@
     <h2>Quick preview</h2>
     <p class="small">Recent uploads & highlights will appear here.</p>
   </section>
+
 </main>
 
 <script src="assets/js/app.js"></script>
 <script>
-const user = AUTH.getUser();
-if(!user) location.href='index.html'; // redirect to login if not logged in
-document.getElementById('logoutBtn').addEventListener('click', ()=>{
-  AUTH.logout(); location.href='index.html';
-});
+document.addEventListener('DOMContentLoaded', () => {
+  // Redirect to login if not logged in
+  if(!AUTH.getCurrentUser()) location.href='login.html';
 
-// Initialize film roll
-function initFilmRoll(){
-  const items = document.querySelectorAll('.film-item');
-  items.forEach(item=>{
-    item.addEventListener('click', ()=>{ location.href=item.dataset.page; });
+  // Film item click
+  document.querySelectorAll('.film-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const page = item.dataset.page;
+      location.href = page;
+    });
   });
-}
-initFilmRoll();
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', e=>{
+    e.preventDefault();
+    AUTH.logout();
+    location.href='login.html';
+  });
+});
 </script>
+
 </body>
 </html>
